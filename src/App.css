@@ -1,0 +1,422 @@
+/* ─── Theme variables ─────────────────────────────────────── */
+:root {
+  --bg:               #1e1e2e;
+  --bg-secondary:     #181825;
+  --surface:          #2a2e39;
+  --surface-elevated: #232634;
+  --preview-dark-bg:  #282c34;
+  --preview-dark-elevated: #21252b;
+  --preview-dark-heading: #e06c75;
+  --border:           #313244;
+  --text:             #cdd6f4;
+  --text-muted:       #a6adc8;
+  --accent:           #cba6f7;
+  --link:             #89b4fa;
+  --strong:           #f5e0dc;
+  --em:               #f5c2e7;
+  --code-inline-bg:   #313244;
+  --code-inline-text: #a6e3a1;
+  --blockquote-bg:    #181825;
+  --blockquote-text:  #a6adc8;
+  --btn-bg:           #313244;
+  --btn-border:       #45475a;
+  --btn-hover:        #45475a;
+  --btn-text:         #cdd6f4;
+}
+
+[data-theme="light"] {
+  --bg:               #ffffff;
+  --bg-secondary:     #f6f8fa;
+  --surface:          #ffffff;
+  --surface-elevated: #f6f8fa;
+  --border:           #d0d7de;
+  --text:             #1f2328;
+  --text-muted:       #656d76;
+  --accent:           #bf5b2a;
+  --link:             #0969da;
+  --strong:           #1f2328;
+  --em:               #953800;
+  --code-inline-bg:   #eef1f4;
+  --code-inline-text: #116329;
+  --blockquote-bg:    #f6f8fa;
+  --blockquote-text:  #656d76;
+  --btn-bg:           #f3f4f6;
+  --btn-border:       #d0d7de;
+  --btn-hover:        #e2e5e9;
+  --btn-text:         #1f2328;
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.updated-at {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.tabs-meta select {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  outline: none;
+}
+
+.tabs-meta select:hover {
+  background: var(--btn-hover);
+}
+
+.tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 6px 10px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabs-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  flex: 1;
+}
+
+.tabs-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.tab-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 240px;
+  padding: 7px 10px 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tab-chip.active {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.tab-chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+}
+
+.tab-chip-input {
+  width: 100%;
+  min-width: 80px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  outline: none;
+}
+
+.tab-chip-close {
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+.tab-chip:hover .tab-chip-close {
+  opacity: 1;
+}
+
+/* ─── Workspace ───────────────────────────────────────────── */
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pane {
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Editor pane ─────────────────────────────────────────── */
+.editor-pane {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+/* @uiw/react-codemirror wrapper — must fill pane so height:100% on .cm-editor resolves */
+.editor-cm {
+  flex: 1;
+  min-height: 0;
+}
+
+.editor-pane .cm-editor {
+  height: 100%;
+  font-size: 14px;
+}
+
+.editor-pane .cm-scroller {
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+/* ─── Divider ─────────────────────────────────────────────── */
+.divider {
+  width: 5px;
+  background: var(--border);
+  cursor: col-resize;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  user-select: none;
+  position: relative;
+}
+
+.divider::after {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+}
+
+.divider:hover,
+.divider.active {
+  background: var(--accent);
+}
+
+/* ─── Preview pane ────────────────────────────────────────── */
+.preview-pane {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+}
+
+.preview-content {
+  padding: 2rem 3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.8;
+  background: var(--surface);
+}
+
+[data-theme="dark"] .preview-pane,
+[data-theme="dark"] .preview-content {
+  background: var(--preview-dark-bg);
+}
+
+/* ─── Markdown typography ─────────────────────────────────── */
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4,
+.preview-content h5,
+.preview-content h6 {
+  color: var(--accent);
+  margin: 1.6em 0 0.5em;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .preview-content h1,
+[data-theme="dark"] .preview-content h2,
+[data-theme="dark"] .preview-content h3,
+[data-theme="dark"] .preview-content h4,
+[data-theme="dark"] .preview-content h5,
+[data-theme="dark"] .preview-content h6 {
+  color: var(--preview-dark-heading);
+}
+
+.preview-content h1 {
+  font-size: 2em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35em;
+  margin-top: 0.5em;
+  color: var(--accent);
+}
+
+.preview-content h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.2em;
+}
+
+.preview-content h3 { font-size: 1.25em; }
+.preview-content h4 { font-size: 1.1em; }
+
+.preview-content p { margin: 0.8em 0; }
+
+.preview-content a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.preview-content a:hover { text-decoration: underline; }
+
+.preview-content strong {
+  color: var(--strong);
+  font-weight: 600;
+}
+
+.preview-content em { color: var(--em); font-style: italic; }
+
+.preview-content ul,
+.preview-content ol {
+  margin: 0.8em 0;
+  padding-left: 1.75em;
+}
+
+.preview-content li { margin: 0.3em 0; }
+
+.preview-content blockquote {
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  border-left: 4px solid var(--accent);
+  background: var(--surface-elevated);
+  border-radius: 8px;
+  color: var(--blockquote-text);
+}
+
+[data-theme="dark"] .preview-content blockquote {
+  background: var(--preview-dark-elevated);
+  border-left-color: var(--preview-dark-heading);
+}
+
+.preview-content blockquote p { margin: 0; }
+
+/* inline code */
+.preview-content code {
+  background: var(--code-inline-bg);
+  color: var(--code-inline-text);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.875em;
+}
+
+/* code blocks */
+.preview-content pre {
+  margin: 1em 0;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+.preview-content pre.hljs {
+  padding: 1em 1.25em;
+  background: var(--surface-elevated);
+}
+
+[data-theme="dark"] .preview-content pre.hljs {
+  background: var(--preview-dark-elevated);
+}
+
+.preview-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+/* tables */
+.preview-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 14px;
+}
+
+.preview-content th,
+.preview-content td {
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  text-align: left;
+}
+
+.preview-content th {
+  background: var(--surface-elevated);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .preview-content th {
+  background: var(--preview-dark-elevated);
+  color: var(--preview-dark-heading);
+}
+
+.preview-content tr:nth-child(even) td {
+  background: var(--surface-elevated);
+}
+
+[data-theme="dark"] .preview-content tr:nth-child(even) td {
+  background: var(--preview-dark-elevated);
+}
+
+.preview-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.75em 0;
+}
+
+.preview-content img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+/* hljs base — transparent so pre.hljs bg wins */
+.preview-content .hljs { background: transparent; }
+
+/* ─── hljs light overrides ────────────────────────────────── */
+[data-theme="light"] .preview-content .hljs            { color: #24292f; }
+[data-theme="light"] .preview-content .hljs-keyword    { color: #cf222e; }
+[data-theme="light"] .preview-content .hljs-built_in   { color: #0550ae; }
+[data-theme="light"] .preview-content .hljs-type       { color: #953800; }
+[data-theme="light"] .preview-content .hljs-literal    { color: #0550ae; }
+[data-theme="light"] .preview-content .hljs-number     { color: #0550ae; }
+[data-theme="light"] .preview-content .hljs-string     { color: #0a3069; }
+[data-theme="light"] .preview-content .hljs-comment    { color: #6e7781; font-style: italic; }
+[data-theme="light"] .preview-content .hljs-doctag     { color: #6e7781; }
+[data-theme="light"] .preview-content .hljs-title,
+[data-theme="light"] .preview-content .hljs-title.class_,
+[data-theme="light"] .preview-content .hljs-title.function_ { color: #bf5b2a; }
+[data-theme="light"] .preview-content .hljs-attr       { color: #0550ae; }
+[data-theme="light"] .preview-content .hljs-variable   { color: #953800; }
+[data-theme="light"] .preview-content .hljs-name       { color: #116329; }
+[data-theme="light"] .preview-content .hljs-tag        { color: #116329; }
+[data-theme="light"] .preview-content .hljs-selector-tag  { color: #cf222e; }
+[data-theme="light"] .preview-content .hljs-selector-id   { color: #0e7490; }
+[data-theme="light"] .preview-content .hljs-selector-class { color: #0e7490; }
+[data-theme="light"] .preview-content .hljs-emphasis   { font-style: italic; }
+[data-theme="light"] .preview-content .hljs-strong     { font-weight: bold; }
